@@ -1,32 +1,31 @@
 import React from 'react';
+import TodoList from './TodoList';
 
 function App() {
+    let items = [
+        {
+            id:1,
+            text: 'Learn Javascript',
+            completed: false
+        },
+        {
+            id:2,
+            text: 'Learn React',
+            completed: false
+        },
+        {
+            id:3,
+            text: 'Build a React App',
+            completed: false
+        }
+    ];
+
+    let title = 'Things to do';
+
     return (
         <div className="container">
             <div className="row">
-                <div className="todolist">
-                    <h1>Todos</h1>
-                    <ul className="list-unstyled">
-                        <li className="ui-state-default">
-                            <div className="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""/>Take out the trash</label>
-                            </div>
-                        </li>
-                        <li className="ui-state-default">
-                            <div className="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""/>Buy bread</label>
-                            </div>
-                        </li>
-                        <li className="ui-state-default">
-                            <div className="checkbox">
-                                <label>
-                                    <input type="checkbox" value=""/>Teach penguins to fly</label>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                <TodoList title={title} items={items}/>
             </div>
         </div>
     );
