@@ -4,13 +4,13 @@ import Header from './Header';
 import Footer from './Footer';
 
 function TodoList(props){
-    const {title,items} = props;
+    const {title,items,addNew} = props;
     //Get the item count
     const count = items.length;
 
     return(
         <div className="todolist">
-        <Header title={title} />
+        <Header title={title} addNew={addNew}/>
 
         <ul className="list-unstyled">
           {

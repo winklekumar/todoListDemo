@@ -1,4 +1,6 @@
 import React from 'react';
+import KeyCode from 'keycode-js';
+
 /** InputBox as stateful component */
 class InputBox extends React.Component{
     constructor(props){
@@ -12,9 +14,27 @@ class InputBox extends React.Component{
         this.setState({value:e.target.value});
     }
 
+    handleKeyUp(e) {
+        console.log("On Key Up:"+e.keyCode+"::::"+KeyCode.KEY_RETURN);
+
+        const {addNew} = this.props;
+        const text = this.state.value.trim();
+        /**Handle enter functionality to add new Item */
+        if (e.keyCode === KeyCode.KEY_RETURN && text) {
+            // Add new Todo Here
+            // Clear the TExt Box
+            addNew(text);
+            this.clear();
+        }
+    }
+
+    clear(){
+        this.setState({value:''});
+    }
+
     render(){
         return(
-            <input type="text" value={this.state.value} onChange={this.handleChange.bind(this)} className="form-control add-todo" placeholder="Add New" /> 
+            <input type="text" value={this.state.value}  onKeyUp={this.handleKeyUp.bind(this)} onChange={this.handleChange.bind(this)} className="form-control add-todo" placeholder="Add New" /> 
         );
     }
 }
