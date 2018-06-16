@@ -4,7 +4,10 @@
   "description": "TODO List Demo",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,11 @@
   },
   "homepage": "https://github.com/winklekumar/todoListDemo#readme",
   "dependencies": {
+    "ajv": "^6.5.1",
+    "bootstrap": "^4.1.1",
+    "bootstrap-theme": "^5.0.0",
+    "jquery": "^3.3.1",
+    "popper": "^1.0.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },
