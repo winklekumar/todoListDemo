@@ -28,13 +28,24 @@ class InputBox extends React.Component{
         }
     }
 
+    handleSubmit(e) {
+        const {addNew} = this.props;
+        const text = this.state.value;
+        console.log("Entered text::"+text);
+        addNew(text);
+        this.clear();
+    }
+
     clear(){
         this.setState({value:''});
     }
 
     render(){
         return(
-            <input type="text" value={this.state.value}  onKeyUp={this.handleKeyUp.bind(this)} onChange={this.handleChange.bind(this)} className="form-control add-todo" placeholder="Add New" /> 
+            <div>
+            <input type="text" value={this.state.value}  onKeyUp={this.handleKeyUp.bind(this)} onChange={this.handleChange.bind(this)} className="form-control add-todo" placeholder="Add New TODO" /> 
+            <input type="textarea" className="form-control add-todo" placeholder="Description"/> <input className="form-control add-todo" type="date"/><input type="button" value="ADD" onClick={this.handleSubmit.bind(this)}/>
+            </div>
         );
     }
 }

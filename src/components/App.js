@@ -1,56 +1,50 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import TodoList from './TodoList';
+import {FILTER_ACTIVE} from './../services/filter';
+import {getAll, addToList,updateStatus} from './../services/todo';
 
 class App extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.state={
-
-            items : [
-            {
-                id:1,
-                text: 'Learn Javascript',
-                completed: false
-            },
-            {
-                id:2,
-                text: 'Learn React',
-                completed: false
-            },
-            {
-                id:3,
-                text: 'Build a React App',
-                completed: false
-            }
-        ]
-         }
+        this.state = {
+            filter: FILTER_ACTIVE,
+            items: getAll()
+        }
     }
 
-    addNew(text){
-        let nextId = this.state.items.length+1;
-        let item ={
-            id:nextId,
-            text:text
-        };
-        let updatedList = this.state.items.concat([item]);
+    render() {
+        let title = 'Superloop - Things to do';
 
+        return (
+            <div className="container">
+                <div className="row">
+                    <TodoList title={title}
+                        addNew={this.addNew.bind(this)}
+                        changeFilter={this.changeFilter.bind(this)}
+                        changeStatus={this.changeStatus.bind(this)}
+                        {...this.state}
+                    />
+                </div>
+            </div>
+        );
+    }
+
+    addNew(text) {
+        let updatedList = addToList(this.state.items, {text, completed: false});
+
+        this.setState({
+            items: updatedList
+        })
+    }
+
+    changeFilter(filter) {
+        this.setState({filter});
+    }
+
+    changeStatus(itemId, completed) {
+        const updatedList = updateStatus(this.state.items, itemId, completed);
         this.setState({items:updatedList});
     }
-
-    
-
-    
-   render(){
-    let title = 'Things to do';
-    return (
-        <div className="container">
-            <div className="row">
-                <TodoList title={title}  addNew={this.addNew.bind(this)} items={this.state.items}/>
-            </div>
-        </div>
-    );
-   }
-
 }
 
 export default App;
