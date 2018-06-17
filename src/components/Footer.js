@@ -10,7 +10,7 @@ export default function Footer(props) {
                 <strong>
                     <span className="count-todos">{count}</span>
                 </strong>
-                {' items left'}
+                {' items overall'}
             </div>
             <div className="pull-right">
                 <Filter filter={filter} change={changeFilter}/>
