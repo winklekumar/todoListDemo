@@ -8,8 +8,39 @@ class App extends Component {
         super();
         this.state = {
             filter: FILTER_ACTIVE,
-            items: getAll()
+            //Get all the options, if not using REST API 
+            items: getAll(),
+            testItems:[]
         }
+    }
+    componentWillMount(){
+        console.log("Inside ComponentWillMount");
+        fetch('http://localhost:8080/todos')
+        .then((response) => response.json())
+        .then((responseJson) => {
+            console.log(responseJson);
+        })
+        fetch('http://localhost:8080/todos').then(results=>{
+            console.log("Inside ComponentWillMount 1");
+            return results.json()}).then(data=>{ 
+                /*let servicedata=data.map((todotestItem)=>{
+                    return(
+                     <div key={todotestItem.id}>
+                         {todotestItem.id}
+                    </div>
+                    )
+                })*/
+    this.setState({testItems:data});  
+    this.setState({items:data});   
+    console.log("state::", this.state.testItems)
+    }).catch((error) => {
+        console.log("Error in API Call-------",error);
+   });
+    console.log("End ComponentWillMount 1");
+        
+    }
+    componentDidMount(){
+        console.log("Inside ComponentDidMount");
     }
 
     render() {
@@ -25,6 +56,9 @@ class App extends Component {
                         {...this.state}
                     />
                 </div>
+                {/*<div className="container1">
+                {this.state.testItems};
+        </div>*/}
             </div>
         );
     }

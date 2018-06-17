@@ -5,6 +5,12 @@ import update from 'immutability-helper';
  * @return {Array}
  */
 export function getAll() {
+   /* let servicedata='';
+    console.log("Start What's going on");
+    fetch('https://crossorigin.me/http://localhost:8080/todos').then(results=>results.json()).then(data=>
+    {servicedata=data.results})
+
+    console.log("What's going on::",servicedata);*/
     return [
         {
             id: 1,
